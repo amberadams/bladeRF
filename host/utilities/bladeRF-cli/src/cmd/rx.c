@@ -225,11 +225,11 @@ void *rx_task(void *cli_state_arg)
                 pthread_mutex_lock(&rx->file_mgmt.file_meta_lock);
 
                 switch (rx->file_mgmt.format) {
-                    case RXTX_FMT_CSV_SC16Q12:
+                    case RXTX_FMT_CSV_SC16Q11:
                         cb_data.write_samples = rx_write_csv_sc16q12;
                         break;
 
-                    case RXTX_FMT_BIN_SC16Q12:
+                    case RXTX_FMT_BIN_SC16Q11:
                         cb_data.write_samples = rx_write_bin_sc16q12;
                         break;
 
@@ -257,7 +257,7 @@ void *rx_task(void *cli_state_arg)
                                 rx_callback,
                                 &rx->data_mgmt.buffers,
                                 rx->data_mgmt.num_buffers,
-                                BLADERF_FORMAT_SC16_Q12,
+                                BLADERF_FORMAT_SC16_Q11,
                                 rx->data_mgmt.samples_per_buffer,
                                 rx->data_mgmt.num_transfers,
                                 &cb_data);
@@ -310,10 +310,10 @@ static int rx_cmd_start(struct cli_state *s)
 
     if (status == 0) {
         pthread_mutex_lock(&s->rx->file_mgmt.file_lock);
-        if(s->rx->file_mgmt.format == RXTX_FMT_CSV_SC16Q12) {
+        if(s->rx->file_mgmt.format == RXTX_FMT_CSV_SC16Q11) {
             s->rx->file_mgmt.file = fopen(s->rx->file_mgmt.path, "w");
         } else {
-            /* RXTX_FMT_BIN_SC16Q12, open file in binary mode */
+            /* RXTX_FMT_BIN_SC16Q11, open file in binary mode */
             s->rx->file_mgmt.file = fopen(s->rx->file_mgmt.path, "wb");
         }
         if (!s->rx->file_mgmt.file) {
