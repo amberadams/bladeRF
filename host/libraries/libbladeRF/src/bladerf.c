@@ -1083,6 +1083,13 @@ int bladerf_print_correction(struct bladerf *dev, bladerf_correction_module modu
     return dev->fn->print_correction(dev,module,value);
 }
 
+/*------------------------------------------------------------------------------
+ * Get current timestamp counter
+ *----------------------------------------------------------------------------*/
+int bladerf_get_timestamp(struct bladerf *dev, bladerf_module module, uint64_t *value)
+{
+    return dev->fn->get_timestamp(dev,module,value);
+}
 
 /*------------------------------------------------------------------------------
  * VCTCXO DAC register write

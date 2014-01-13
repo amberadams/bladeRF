@@ -1557,6 +1557,16 @@ int bladerf_set_correction(struct bladerf *dev, bladerf_correction_module module
 API_EXPORT 
 int bladerf_print_correction(struct bladerf *dev, bladerf_correction_module module, int16_t *value);
 
+/**
+ *
+ * @param   dev         Device handle
+ * @param   module      Module to perform streaming with
+ * @param   val         Pointer to variable the data should be read into
+ *
+ * @return 0 on success, value from \ref RETCODES list on failure
+ */
+API_EXPORT
+int bladerf_get_timestamp(struct bladerf *dev, bladerf_module mod, uint64_t *value);
 
 /**
  * Write value to VCTCXO DAC
